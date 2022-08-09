@@ -9,6 +9,7 @@ import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Row.MissingCellPolicy;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
@@ -36,14 +37,20 @@ public class ExcelDataServiceImpl implements IExcelDataService {
 
 		// DataFormatter para formatear y obtener el valor de cada celda como String
 		DataFormatter dataFormatter = new DataFormatter();
-
+		
+		
+		
 		// Crear Workbook
 		try {
 			workbook = WorkbookFactory.create(new File(EXCEL_FILE_PATH));
+			workbook.setMissingCellPolicy(MissingCellPolicy.RETURN_BLANK_AS_NULL);
 		} catch (EncryptedDocumentException | IOException e) {
 			e.printStackTrace();
 		}
-
+		
+		
+		
+		
 		// Recuperar el número de hojas en el Workbook
 		System.out.println("-Workbook contiene '" + workbook.getNumberOfSheets() + "' Hojas-");
 
@@ -88,7 +95,7 @@ public class ExcelDataServiceImpl implements IExcelDataService {
 			altas.setDni(Double.valueOf(excelData.get(i + 1)));
 			altas.setTelefono(excelData.get(i + 2));
 			altas.setApellido(excelData.get(i + 3));
-			//inv.setDireccion(excelData.get(i + 4));
+			altas.setDireccion(excelData.get(i + 4));
 
 			altasList.add(altas);
 			i = i + (noOfColumns);

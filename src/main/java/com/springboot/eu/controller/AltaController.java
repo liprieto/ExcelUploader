@@ -57,6 +57,8 @@ public class AltaController {
     	List<Alta> excelDataAsList = excelservice.getExcelDataAsList();
     	int noOfRecords = excelservice.saveExcelData(excelDataAsList);
     	model.addAttribute("noOfRecords",noOfRecords);
-    	return "success";
+    	return "success";	
+    	
+    	
     }
 }
